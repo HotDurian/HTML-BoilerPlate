@@ -1,3 +1,585 @@
-@import "animate";
-@import "colors";
-@import "base";
+@font-face {
+  font-family: "Artifakt Legend";
+  src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Legend Regular.woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Artifakt Legend";
+  src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Legend Bold.woff");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Artifakt Element";
+  src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Element Light.woff");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Artifakt Element";
+  src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Element Regular.woff");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Artifakt Element";
+  src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Element Medium.woff");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Artifakt Element";
+  src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Element Bold.woff");
+  font-weight: bold;
+}
+
+$font-stack-element: "Artifakt Element", Helvetica, Arial, "sans serif";
+$font-stack-legend: "Artifakt Legend", Helvetica, Arial, "sans serif";
+
+$phone: 640px;
+$tablet: 768px;
+$desktop: 1024px;
+
+$panel-border-color: #DBDBDB;
+$error-color: #E93741;
+$disabled-color: #CACACA;
+
+.notification {
+  background: rgba(102, 204, 0, 0.2);
+  border-radius: 4px;
+  color: #009944;
+  font-family: $font-stack-legend;
+  font-size: 12px;
+  margin-bottom: 18px;
+  margin-top: 18px;
+  padding: 12px 18px;
+}
+
+.warning {
+  background: rgba(233, 54, 65, 0.2);
+  border-radius: 4px;
+  color: #E93741;
+  font-family: $font-stack-legend;
+  font-size: 12px;
+  margin-bottom: 18px;
+  margin-top: 18px;
+  padding: 12px 18px;
+}
+
+a, a:visited, a:hover, a:active, a:focus {
+  text-decoration: none;
+}
+
+body {
+  font-family: $font-stack-element;
+}
+
+form {
+  .form-control {
+    border-radius: 0;
+  }
+
+  .error-msg {
+    display: none;
+  }
+
+  .has-error {
+    .form-control, .form-control:focus {
+      border-color: $error-color;
+    }
+
+    label {
+      color: $error-color;
+    }
+
+    .error-msg {
+      display: block;
+      color: $error-color;
+      font-style: italic;
+    }
+  }
+
+  .form-group {
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+}
+
+.btn, .btn:visited, .btn:active, .btn:hover, .btn:focus {
+  background-color: #0696D7;
+  max-height: 35px;
+}
+
+.row:first-of-type {
+  h1 {
+    font-size: 22px;
+    color: #424242;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  margin-bottom: 30px;
+}
+
+@mixin circlechar($diameter, $font-size, $top, $left) {
+  float: left;
+  color: #ccc;
+
+  & > div {
+    border-radius: 50%;
+    border: 2px solid #ADADAD;
+    color: #ADADAD;
+    font-size: $font-size;
+    font-weight: 500;
+    font-weight: bold;
+    height: $diameter;
+    position: relative;
+    width: $diameter;
+
+    span {
+      left: $left;
+      position: absolute;
+      top: $top;
+    }
+
+    div:last-child {
+      display: block;
+      margin-left: 10px;
+    }
+
+    p {
+      font-weight: 500;
+      margin-top: 16px;
+    }
+  }
+}
+
+.panels-wrapper {
+  @media screen and (max-width: $tablet) {
+    padding: 0;
+  }
+}
+
+.panel {
+  border: 0;
+  border-bottom: 1px solid $panel-border-color;
+  border-radius: 0px;
+  margin-top: 0;
+
+  &:first-of-type {
+    border-top: 1px solid $panel-border-color;
+  }
+}
+
+.panel-group .panel + .panel {
+  margin-top: 0;
+}
+
+.close-button {
+  display: block;
+  height: 16px;
+  width: 16px;
+  background-size: 100% 100%;
+  background-image: url("../img/close.svg");
+  background-repeat: no-repeat;
+  float: right;
+}
+
+#domain-list {
+  & > .panel {
+    padding-bottom: 0px;
+
+    &.expand {
+      background-color: #F1F1F1;
+      padding-bottom: 30px;
+
+      & > .panel-heading {
+        padding: 20px;
+        background-color: transparent;
+
+        .panel-title {
+          & > .expand-button {
+            display: none;
+          }
+
+          & > .close-button {
+            display: block;
+          }
+        }
+      }
+    }
+
+    & > .panel-heading {
+      background-color: white;
+      padding: 20px;
+
+      .panel-title {
+        clear: both;
+        overflow: hidden;
+        display: flex;
+
+        & > div:first-of-type {
+          flex-grow: 1;
+          font-size: 20px;
+          color: #424242;
+          font-weight: 500;
+          float: left;
+
+          & > .status {
+            color: #424242;
+            font-size: 12px;
+            clear: both;
+            font-weight: normal;
+            float: left;
+          }
+        }
+
+        & > .expand-button, & > .close-button {
+          float: right;
+        }
+
+        & > .expand-button {
+          font-size: 14px;
+          display: block;
+        }
+
+        & > .close-button {
+          display: none;
+        }
+      }
+    }
+
+    & > .panel-collapse {
+      .panel-body {
+        border: 0;
+        padding-left: 52px;
+        padding-right: 52px;
+
+        @media screen and (max-width: $tablet) {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+
+        & > p {
+          font-weight: 500;
+          font-size: 10px;
+          color: #ADADAD;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+}
+
+#connection-list {
+  & > .panel {
+    background-color: transparent;
+
+    .show-when-expand {
+      display: none;
+    }
+
+    &.expand {
+      .panel-heading {
+        padding-bottom: 0;
+
+        .panel-title {
+          & > .expand-button {
+            display: none;
+          }
+
+          & > .close-button {
+            display: block;
+          }
+        }
+      }
+
+      .show-when-expand {
+        clear: both;
+        color: #424242;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: normal;
+        padding-right: 10px;
+        margin-top: 5px;
+      }
+    }
+
+    & > .panel-heading {
+      background-color: transparent;
+      padding-left: 0;
+      padding-right: 0;
+
+      .panel-title {
+        padding: 10px 0;
+        clear: both;
+        overflow: hidden;
+        display: flex;
+        font-weight: 500;
+
+        h3 {
+          float: left;
+          margin-left: 13px;
+          margin-bottom: 0;
+          margin-top: 3px;
+          font-size: 14px;
+          color: $disabled-color;
+          flex-grow: 1;
+
+          &.activated {
+            color: #424242;
+          }
+        }
+
+        i {
+          float: right;
+        }
+
+        & > .expand-button {
+          display: block;
+          background-image: url("../img/chevron-down.svg");
+          background-repeat: no-repeat;
+          background-size: 100%;
+          width: 13px;
+          height: 20px;
+        }
+
+        & > .close-button {
+          display: none;
+        }
+      }
+    }
+
+    & > .panel-collapse {
+      .panel-body {
+        padding-left: 32px;
+      }
+    }
+
+    button:last-child {
+      margin-top: 25px;
+    }
+  }
+
+  .inverse-btn {
+    background: #FFFFFF;
+    border-radius: 4px;
+    border: 2px solid #0696D7;
+    color: #0697D8;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: $font-stack-legend;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  #connection-list-1 {
+    .download-btn {
+      @extend .inverse-btn;
+    }
+  }
+
+  #connection-list-2 {
+    .steps {
+      @include circlechar(16px, 10px, 0, 4px);
+
+      margin-left: 8px;
+    }
+
+    .form-group {
+      label {
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      & > span {
+        float: left;
+      }
+
+      .radio {
+        float: left;
+        margin-left: 2px;
+
+        label:last-child {
+          margin-left: 30px;
+        }
+      }
+
+      &:nth-child(3) {
+        margin-top: 40px;
+      }
+
+      &:nth-child(5) {
+        margin-top: 30px;
+      }
+
+      input[type=file] {
+        clear: both;
+      }
+
+      .file-upload {
+        clear: both;
+        overflow: hidden;
+        border: 1px solid $disabled-color;
+        background-color: white;
+        padding: 4px;
+
+        & > span {
+          font-size: 12px;
+          position: relative;
+          top: 5px;
+          left: 12px;
+
+          &.placeholder {
+            color: $disabled-color;
+
+            @media screen and (max-width: 350px) {
+              display: none;
+            }
+          }
+
+          &.file-input-name {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-right: 12px;
+          }
+        }
+
+        span + span.placeholder {
+          display: none;
+        }
+      }
+
+      &.has-error {
+        .file-upload {
+          border-color: $error-color;
+        }
+
+        & > span {
+          color: $error-color;
+        }
+      }
+
+      .file-input-wrapper {
+        @extend .inverse-btn;
+
+        float: left;
+      }
+    }
+  }
+
+  @mixin rounded-rect-text($_color) {
+    font-family: $font-stack-element;
+    font-size: 10px;
+    color: $_color;
+    font-weight: 500;
+    border: 1px solid $_color;
+    border-radius: 10px;
+    padding: 0px 7px;
+    vertical-align: top;
+    margin-left: 10px;
+  }
+
+  #connection-list-3 {
+    .url-display {
+      font-family: $font-stack-element;
+      font-weight: 500;
+      font-size: 12px;
+      color: #424242;
+
+      .url-type {
+        @include rounded-rect-text(#0697D8);
+      }
+
+      div {
+        font-weight: normal;
+      }
+    }
+
+    .url-display:nth-child(2) {
+      .url-type {
+        @include rounded-rect-text(#5EB7AA);
+      }
+    }
+
+    .url-display:not(:first-child) {
+      margin-top: 25px;
+    }
+
+    .inverse-btn {
+      margin-top: 25px;
+    }
+  }
+
+  .steps {
+    @include circlechar(20px, 12px, 0, 5px);
+  }
+
+  .not-active {
+    color: $disabled-color;
+
+    .expand-button {
+      background-image: url("../img/chevron-down-disabled.svg") !important;
+    }
+  }
+}
+
+.connection {
+  h3 {
+    font-family: $font-stack-element;
+    font-size: 10px;
+    color: #ADADAD;
+  }
+
+  .checkbox-wrapper {
+    clear: both;
+    overflow: hidden;
+    padding: 10px 0;
+    display: flex;
+
+    & > span {
+      float: left;
+      font-size: 14px;
+      font-weight: 500;
+      flex-grow: 1;
+      padding-right: 10px;
+    }
+
+    .checkbox {
+      float: right;
+      margin-top: -5px;
+      margin-bottom: 0;
+
+      label {
+        padding-left: 0;
+      }
+    }
+
+    border-bottom: 1px solid $panel-border-color;
+  }
+
+  &.not-active {
+    color: $disabled-color;
+  }
+}
+
+.steps {
+  @include circlechar(20px, 12px, 0, 5px);
+}
+
+.not-active {
+  pointer-events: none;
+  cursor: default;
+}
