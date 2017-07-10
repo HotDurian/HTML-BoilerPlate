@@ -3,44 +3,36 @@
   src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Legend Regular.woff");
   font-weight: 400;
 }
-
 @font-face {
   font-family: "Artifakt Legend";
   src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Legend Bold.woff");
   font-weight: bold;
 }
-
 @font-face {
   font-family: "Artifakt Element";
   src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Element Light.woff");
   font-weight: 300;
 }
-
 @font-face {
   font-family: "Artifakt Element";
   src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Element Regular.woff");
   font-weight: normal;
 }
-
 @font-face {
   font-family: "Artifakt Element";
   src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Element Medium.woff");
   font-weight: 500;
 }
-
 @font-face {
   font-family: "Artifakt Element";
   src: url("https://cdn.web-platform.io/artifakt/release/v1.2.0/Artifakt Element Bold.woff");
   font-weight: bold;
 }
-
 $font-stack-element: "Artifakt Element", Helvetica, Arial, "sans serif";
 $font-stack-legend: "Artifakt Legend", Helvetica, Arial, "sans serif";
-
 $phone: 640px;
 $tablet: 768px;
 $desktop: 1024px;
-
 $panel-border-color: #DBDBDB;
 $error-color: #E93741;
 $disabled-color: #CACACA;
@@ -67,7 +59,11 @@ $disabled-color: #CACACA;
   padding: 12px 18px;
 }
 
-a, a:visited, a:hover, a:active, a:focus {
+a,
+a:active,
+a:focus,
+a:hover,
+a:visited {
   text-decoration: none;
 }
 
@@ -85,7 +81,8 @@ form {
   }
 
   .has-error {
-    .form-control, .form-control:focus {
+    .form-control,
+    .form-control:focus {
       border-color: $error-color;
     }
 
@@ -107,7 +104,11 @@ form {
   }
 }
 
-.btn, .btn:visited, .btn:active, .btn:hover, .btn:focus {
+.btn,
+.btn:active,
+.btn:focus,
+.btn:hover,
+.btn:visited {
   background-color: #0696D7;
   max-height: 35px;
 }
@@ -121,10 +122,8 @@ form {
   p {
     font-size: 12px;
   }
-
   margin-bottom: 30px;
 }
-
 @mixin circlechar($diameter, $font-size, $top, $left) {
   float: left;
   color: #ccc;
@@ -167,7 +166,7 @@ form {
 .panel {
   border: 0;
   border-bottom: 1px solid $panel-border-color;
-  border-radius: 0px;
+  border-radius: 0;
   margin-top: 0;
 
   &:first-of-type {
@@ -191,7 +190,7 @@ form {
 
 #domain-list {
   & > .panel {
-    padding-bottom: 0px;
+    padding-bottom: 0;
 
     &.expand {
       background-color: #F1F1F1;
@@ -238,7 +237,8 @@ form {
           }
         }
 
-        & > .expand-button, & > .close-button {
+        & > .close-button,
+        & > .expand-button {
           float: right;
         }
 
@@ -258,7 +258,6 @@ form {
         border: 0;
         padding-left: 52px;
         padding-right: 52px;
-
         @media screen and (max-width: $tablet) {
           padding-left: 20px;
           padding-right: 20px;
@@ -360,8 +359,10 @@ form {
       }
     }
 
-    button:last-child {
-      margin-top: 25px;
+    button {
+      &:last-child {
+        margin-top: 25px;
+      }
     }
   }
 
@@ -373,7 +374,7 @@ form {
     display: block;
     font-size: 12px;
     font-weight: bold;
-    letter-spacing: 0px;
+    letter-spacing: 0;
     padding-left: 10px;
     padding-right: 10px;
     font-family: $font-stack-legend;
@@ -392,7 +393,6 @@ form {
   #connection-list-2 {
     .steps {
       @include circlechar(16px, 10px, 0, 4px);
-
       margin-left: 8px;
     }
 
@@ -410,16 +410,22 @@ form {
         float: left;
         margin-left: 2px;
 
-        label:last-child {
-          margin-left: 30px;
+        label {
+          &:last-child {
+            margin-left: 30px;
+          }
         }
       }
 
-      &:nth-child(3) {
-        margin-top: 40px;
+      &:nth-child(2) {
+        margin-top: 30px;
       }
 
-      &:nth-child(5) {
+      &:nth-child(4) {
+        margin-top: 30px;
+      }
+
+      &:nth-child(6) {
         margin-top: 30px;
       }
 
@@ -431,7 +437,7 @@ form {
         clear: both;
         overflow: hidden;
         border: 1px solid $disabled-color;
-        background-color: white;
+        background-color: #fff;
         padding: 4px;
 
         & > span {
@@ -442,7 +448,6 @@ form {
 
           &.placeholder {
             color: $disabled-color;
-
             @media screen and (max-width: 350px) {
               display: none;
             }
@@ -474,12 +479,10 @@ form {
 
       .file-input-wrapper {
         @extend .inverse-btn;
-
         float: left;
       }
     }
   }
-
   @mixin rounded-rect-text($_color) {
     font-family: $font-stack-element;
     font-size: 10px;
@@ -487,7 +490,7 @@ form {
     font-weight: 500;
     border: 1px solid $_color;
     border-radius: 10px;
-    padding: 0px 7px;
+    padding: 0 7px;
     vertical-align: top;
     margin-left: 10px;
   }
@@ -566,7 +569,6 @@ form {
         padding-left: 0;
       }
     }
-
     border-bottom: 1px solid $panel-border-color;
   }
 
