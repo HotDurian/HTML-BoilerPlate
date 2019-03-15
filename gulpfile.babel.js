@@ -27,8 +27,8 @@ const paths = {
         dest: './public/'
     },
     img: {
-        src: './src/img',
-        dest: './public/img'
+        src: './src/img/',
+        dest: './public/img/'
     }
 };
 
