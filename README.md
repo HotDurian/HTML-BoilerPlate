@@ -1,4 +1,4 @@
-This project was bootstrapped with [Gulp](hhttps://gulpjs.com/), [Sass](https://sass-lang.com/) and [CoffeeScript](https://coffeescript.org/).
+This project was bootstrapped with [Gulp](https://gulpjs.com/), [Sass](https://sass-lang.com/) and [CoffeeScript](https://coffeescript.org/).
 
 ## Available Scripts
 
